@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padel Tennis - Der ultimative Trendsport</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ================= VARIABLES & RESET ================= */
+        :root {
+            --primary-color: #DBFF00; /* Neon Gelb/Grün (Padel-Ball Farbe) */
+            --secondary-color: #FF007F; /* Neon Pink für Akzente */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --text-light: #F5F5F5;
+            --font-headings: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth Scrolling für die Navigation */
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ================= TYPOGRAPHY & BUTTONS ================= */
+        h1, h2, h3 {
+            font-family: var(--font-headings);
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            padding: 15px 30px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(219, 255, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: var(--secondary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+        }
+
+        /* ================= NAVBAR (STICKY) ================= */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-family: var(--font-headings);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            transition: 0.3s;
+        }
+
+        /* ================= SECTIONS BASE ================= */
+        section {
+            padding: 100px 5%;
+        }
+
+        /* ================= HERO SECTION ================= */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1622279457486-640ca4a4ab62?auto=format&fit=crop&w=1920&q=80') center/cover;
+            padding-top: 80px;
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        #hero h1 span {
+            color: var(--primary-color);
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        #hero .btn {
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* ================= INTRO & VORTEILE ================= */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary-color);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        /* ================= REGELN ================= */
+        #regeln {
+            background: var(--bg-card);
+        }
+
+        .rules-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .rule-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--bg-dark);
+            padding: 15px 20px;
+            border-radius: 10px;
+        }
+
+        .rule-number {
+            font-family: var(--font-headings);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--secondary-color);
+            margin-right: 20px;
+        }
+
+        /* ================= GALERIE ================= */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.03);
+        }
+
+        /* ================= FAQ (ACCORDION) ================= */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-family: var(--font-headings);
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            color: var(--primary-color);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            padding: 0 20px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            color: #ccc;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Groß genug für den Text */
+            padding: 0 20px 20px 20px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* ================= CONTACT & FOOTER ================= */
+        #kontakt {
+            text-align: center;
+            background: var(--bg-card);
+        }
+
+        footer {
+            background: #000;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= MEDIA QUERIES (MOBILE FIRST APPROACH) ================= */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--bg-card);
+                width: 100%;
+                text-align: center;
+                padding: 20px 0;
+                transition: 0.3s;
+                border-bottom: 2px solid var(--primary-color);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#hero" class="logo">Tennishof <span>Rottenbrunner</span></a>
+        <ul class="nav-links">
+            <li><a href="#intro">Was ist Padel?</a></li>
+            <li><a href="#vorteile">Vorteile</a></li>
+            <li><a href="#regeln">Regeln</a></li>
+            <li><a href="#galerie">Galerie</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <h1>Ready for <span>Padel?</span></h1>
+        <p>Der Mix aus Tennis und Squash. Mehr Action, mehr Teamgeist, mehr Fun. Schnapp dir einen Schläger und ab in den Käfig!</p>
+        <a href="#kontakt" class="btn">Jetzt ausprobieren</a>
+    </section>
+
+    <section id="intro">
+        <h2>Was ist Padel Tennis?</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto;">Padel ist die am schnellsten wachsende Sportart der Welt. Es wird immer im Doppel (2 gegen 2) auf einem Court gespielt, der von Glaswänden umgeben ist. Das Geniale: Die Wände dürfen ins Spiel einbezogen werden! Es ist leichter zu lernen als klassisches Tennis und garantiert ab der ersten Minute pure Action.</p>
+    </section>
+
+    <section id="vorteile">
+        <h2>Warum du es lieben wirst</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>🔥 Sofortiger Spielspaß</h3>
+                <p>Du brauchst keine jahrelange Technik-Schule. Nach 10 Minuten hast du den Dreh raus und die Rallyes können beginnen.</p>
+            </div>
+            <div class="card">
+                <h3>💪 Pure Fitness</h3>
+                <p>Ohne dass du es merkst, läufst du, springst du und trainierst deinen ganzen Körper. Cardio war noch nie so cool.</p>
+            </div>
+            <div class="card">
+                <h3>🤝 Team-Vibe</h3>
+                <p>Da immer 2 gegen 2 gespielt wird, steht die Gemeinschaft im Vordergrund. Perfekt, um mit Freunden am Wochenende durchzustarten.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="regeln">
+        <h2>Die Basic-Regeln</h2>
+        <div class="rules-content">
+            <div class="rule-step">
+                <div class="rule-number">1</div>
+                <div><strong>Der Aufschlag:</strong> Wird immer von unten ("Underhand") ausgeführt. Der Ball muss vorher auf dem Boden aufkommen.</div>
+            </div>
+            <div class="rule-step">
+                <div class="rule-number">2</div>
+                <div><strong>Zählweise:</strong> Genau wie beim Tennis (15, 30, 40, Spiel). Ein Satz geht bis 6.</div>
+            </div>
+            <div class="rule-step">
+                <div class="rule-number">3</div>
+                <div><strong>Die Wände:</strong> Wenn der Ball auf deiner Seite auf dem Boden aufkommt, darf er danach an die Glaswand springen und du kannst ihn immer noch zurückschlagen!</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galerie">
+        <h2>Action Shots</h2>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1622279457486-640ca4a4ab62?auto=format&fit=crop&w=600&q=80" alt="Padel Action" class="gallery-img">
+            <img src="https://images.unsplash.com/photo-1622279457486-640ca4a4ab62?auto=format&fit=crop&w=600&q=80" alt="Padel Schläger" class="gallery-img">
+            <img src="https://images.unsplash.com/photo-1622279457486-640ca4a4ab62?auto=format&fit=crop&w=600&q=80" alt="Padel Court" class="gallery-img">
+        </div>
+    </section>
+
+    <section id="faq">
+        <h2>Deine Fragen (FAQ)</h2>
+        <div class="faq-container">
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Was ist Padel Tennis?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Paddel Tennis (oft einfach „Padel“ genannt) ist eine moderne Trendsportart, die Elemente aus Tennis und Squash kombiniert. Gespielt wird auf einem kleineren Feld, das von Glas- und Gitterwänden umgeben ist. Das Besondere: Die Wände dürfen aktiv ins Spiel einbezogen werden, ähnlich wie beim Squash. Dadurch entstehen längere Ballwechsel und mehr Action. Meistens wird im Doppel gespielt, also 2 gegen 2, was das Ganze besonders sozial und teamorientiert macht.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Brauche ich Vorkenntnisse?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolut nicht! Genau das ist einer der größten Vorteile von Padel. Du kannst komplett ohne Erfahrung einsteigen und trotzdem von Anfang an Spaß haben. Im Gegensatz zu Tennis haben die Schläger keine Saiten, sondern eine feste Oberfläche. Dadurch ist es viel einfacher, den Ball sauber zu treffen und zu kontrollieren – selbst wenn du noch nie einen Schläger in der Hand hattest.
+
+Außerdem ist das Spielfeld kleiner und die Geschwindigkeit des Spiels etwas leichter zu handhaben. Das bedeutet, dass du schneller reagierst und längere Ballwechsel entstehen, ohne dass du perfekt spielen musst. Auch die Regeln sind einfach aufgebaut und schnell verständlich, sodass du dich nicht lange einarbeiten musst.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Brauche ich eine spezielle Ausrüstung?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Du brauchst einen speziellen Paddel-Schläger, der kleiner und kompakter als ein Tennisschläger ist und keine Bespannung hat. Außerdem werden spezielle Paddel-Bälle verwendet, die dem Tennisball ähnlich sind, aber etwas weniger Druck haben. Die gute Nachricht: In vielen Anlagen kannst du Schläger und Bälle einfach ausleihen. Du kannst also ganz unkompliziert starten, ohne direkt Geld für Ausrüstung ausgeben zu müssen.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Ist es teuer?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Im Vergleich zu vielen anderen Sportarten ist Paddel Tennis relativ günstig. Die Platzkosten werden in der Regel durch vier Spieler geteilt, wodurch es für jeden erschwinglich bleibt. Wenn du dir am Anfang Equipment leihst, sparst du zusätzlich Geld. Insgesamt ist es also ein Sport, den man auch regelmäßig machen kann, ohne viel auszugeben.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <h2>Bock bekommen?</h2>
+        <p style="margin-bottom: 30px;">Dann schnapp dir deine Freunde und probier Padel einfach selbst aus!</p>
+        <button class="btn"><a href="https://rottenbrunner.tennisplatz.info/reservierung?c=3223"target="_blank">Court buchen</button></a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 PadelPro. Mach den Sport zu deinem Lifestyle.</p>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links li a');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Schließe das Menü, wenn ein Link geklickt wird (Mobile)
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 2. FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Schließe alle anderen offenen FAQs (optional, für ein cleaneres Erlebnis)
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle das aktuelle Element
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
